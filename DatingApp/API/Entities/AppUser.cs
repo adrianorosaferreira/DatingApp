@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using API.Extensions;
-using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
