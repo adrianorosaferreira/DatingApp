@@ -29,9 +29,6 @@ export class NavComponent implements OnInit {
       console.log(token);
       this.router.navigateByUrl('/members');
       this.showSuccess();
-    }, error => {
-      console.error('The following error occurred when authentication was attempted: ', error);
-      this.toastr.error(error.error);
     });
   }
 

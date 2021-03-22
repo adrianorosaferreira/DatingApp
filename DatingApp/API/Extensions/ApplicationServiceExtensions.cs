@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DatingApp.API.Extensions
+namespace API.Extensions
 {
     public static class ApplicationServiceExtensions
     {
