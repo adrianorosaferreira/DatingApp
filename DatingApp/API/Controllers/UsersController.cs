@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using API.Interfaces;
+using API.DTO;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -18,15 +19,17 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            return Ok(await _userRepository.GetUsersAsync());
+            var users = await _userRepository.GetMembersAsync();
+
+            return Ok(users);
         }
 
         [HttpGet("{username}")]
-        public async Task<ActionResult<AppUser>> GetUsers(string username)
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _userRepository.GetUserByUserNameAsync(username);
+            return await _userRepository.GetMemberAsync(username);
         }
     }
 }
