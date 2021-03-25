@@ -4,6 +4,8 @@ import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/_service/account.service';
 import { MembersService } from 'src/app/_service/members.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-member-edit',
@@ -11,10 +13,14 @@ import { MembersService } from 'src/app/_service/members.service';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
+  @ViewChild('editForm') editForm: NgForm;
   member: Member;
   user: User;
 
-  constructor(private accountService: AccountService, private memberService: MembersService) {
+  constructor(
+      private accountService: AccountService,
+      private memberService: MembersService,
+      private toastr: ToastrService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
@@ -26,6 +32,12 @@ export class MemberEditComponent implements OnInit {
     this.memberService.getMemberByName(this.user.userName).subscribe(member => {
       this.member = member;
     });
+  }
+
+  updateMember(): void {
+    console.log('updated:', this.member);
+    this.toastr.success('Amazing, Your member was updated', 'Success!!');
+    this.editForm.reset(this.member);
   }
 
 }
